@@ -24,6 +24,7 @@ jobs:
   <<: *defaults
   steps:
    - checkout
+   - run : npm i
    - run : npm run lint
  
  test:
@@ -32,6 +33,12 @@ jobs:
    - checkout
    - run : npm i
    - run : npm run test
+
+ analyze:
+  <<: *defaults
+  steps:
+   - checkout
+   - run : npm audit
 
  print_world:
   <<: *defaults
@@ -52,3 +59,9 @@ workflows:
          requires: 
           - print_hello
       - build
+      - test :
+         requires:
+          - build
+      - analyze :
+         requires :
+          - test
