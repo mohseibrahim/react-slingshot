@@ -11,15 +11,6 @@ orbs:
   welcome: circleci/welcome-orb@0.4.1
 
 jobs:
- print_hello:
-  <<: *defaults
-  steps:
-   - checkout
-   - run :
-      name : print_hello
-      command :
-       echo "hello"
-
  build:
   <<: *defaults
   steps:
@@ -40,24 +31,13 @@ jobs:
    - checkout
    - run : npm audit
 
- print_world:
-  <<: *defaults
-  steps:
-  - checkout
-  - run :
-      name : print_world 
-      command :
-       echo "world"      
+     
 # Orchestrate or schedule a set of jobs
 workflows:
   # Name the workflow "welcome"
   default:
     # Run the welcome/run job in its own container
     jobs:
-      - print_hello 
-      - print_world :
-         requires: 
-          - print_hello
       - build
       - test :
          requires:
