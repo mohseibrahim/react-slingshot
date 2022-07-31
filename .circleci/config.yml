@@ -20,12 +20,12 @@ jobs:
       command :
        echo "hello"
 
-  build:
-   <<: *defaults
-   steps:
-    - checkout
-    - run npm i
-    - run npm run lint
+ build:
+  <<: *defaults
+  steps:
+   - checkout
+   - run : npm i
+   - run : npm run lint
 
  print_world:
   <<: *defaults
